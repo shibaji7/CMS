@@ -1,0 +1,9 @@
+python model.py 0.5 0.8 > out_0.5_0.8.log 2>&1 &
+python model.py 0.5 1.0 > out_0.5_1.0.log 2>&1 &
+python model.py 0.5 1.2 > out_0.5_1.2.log 2>&1 &
+python model.py 0.5 1.4 > out_0.5_1.4.log 2>&1 &
+python model.py 0.5 1.6 > out_0.5_1.6.log 2>&1 &
+python model.py 0.5 1.8 > out_0.5_1.8.log 2>&1 &
+python model.py 0.5 2.4 > out_0.5_2.4.log 2>&1 &
+python model.py 0.5 2.8 > out_0.5_2.8.log 2>&1 &
+python model.py 0.5 3.0 > out_0.5_3.0.log 2>&1 &
