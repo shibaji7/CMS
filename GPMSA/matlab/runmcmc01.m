@@ -1,5 +1,5 @@
 addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/gpmsa_2015/matlab')
-addpath('home/afadikar/Documents/shibaji/git/CMS/GPMSA/matlab')
+addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/matlab')
 addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/PlotFuns')
 
 ebdat = euvac_eg(1);  
@@ -25,6 +25,9 @@ save('pout_10000.mat', 'pout');
 showPvals(pout.pvals);
 
 ip = round(linspace(900,10090,50));
+
+% load previously saved pout object for plotting
+load('pout_10000.mat')
 
 plots(pout, ip, 1);
 plots(pout, ip, 2);
