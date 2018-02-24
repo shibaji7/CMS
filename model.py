@@ -71,15 +71,18 @@ def __abs_model(args):
     hrefs = conf["hrefs"]
     bins = conf["bins"]
     lon = np.mod((lon+180),360)-180
-    print lat,lon
+    fname = "out/attn_%s_%s.csv"%(args[0],args[1])
     if modify:
         etap = float(args[0])
         alphas["0"] = float(args[1]) * alphas["0"]
         alphas["1"] = float(args[1]) * alphas["1"]
         alphas["2"] = float(args[1]) * alphas["2"]
+        lat = float(args[2])
+        lon = float(args[3])
+    	fname = args[4]+"/attn_%s_%s.csv"%(args[0],args[1])
+        pass
     dn = conf["dn"] - dt.timedelta(minutes=10)
     dates = [dn + dt.timedelta(minutes=x) for x in range(90)]
-    fname = "out/attn_%s_%s.csv"%(args[0],args[1])
     for I,ut in enumerate(dates):
         __non_magnetic_attn_model_1P(ut,lat,lon,freq,code,etap,alphas,hrefs,bins,I,fname)
         pass
