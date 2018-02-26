@@ -79,7 +79,8 @@ def __abs_model(args):
         alphas["2"] = float(args[1]) * alphas["2"]
         lat = float(args[2])
         lon = float(args[3])
-    	fname = args[4]+"/attn_%s_%s.csv"%(args[0],args[1])
+    	fname = args[4]+"/attn_%s_%s_%s_%s.csv"%(args[0],args[1],args[2],args[3])
+        print fname
         pass
     dn = conf["dn"] - dt.timedelta(minutes=10)
     dates = [dn + dt.timedelta(minutes=x) for x in range(90)]
