@@ -11,7 +11,7 @@ def run_code(l):
     os.system(cmd)
     return
 
-D = pd.read_csv("R/out/design_sza.csv")
+D = pd.read_csv("R/out/design_sza_uniform.csv")
 d = D.as_matrix()
 
 pool = mpr.Pool(10)
