@@ -24,7 +24,7 @@ os.mkdir(dirc)
 def run_code(l):
     cmd = "python model.py %.15f %.15f %.2f %.2f %s" % (float(l[0]),float(l[1]),lat, lon, riom)
     print cmd
-    #os.system(cmd)
+    os.system(cmd)
     return
 
 D = pd.read_csv("R/out/design.csv")
