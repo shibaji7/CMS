@@ -50,9 +50,9 @@ if doPlot(1);
         D2subplot(ii,pu,1,[.15 .15 .1 .02],[.01 0 .01 0]);
 %         subplot(pu,3,ii+off);
         if ii~=pu
-            boxplot(r, 'labels',{'',''});
+            boxplot(r, 'labels',{'','',''});
         else
-            boxplot(r,'labels',{'eta','alpha'})
+            boxplot(r,'labels',{'eta','alpha','sza'})
 %             xlabel('k');
         end
         a=axis; axis([a(1) a(2) 0 1]);
@@ -154,7 +154,7 @@ if doPlot(2)
         end
     end
     % now put in the labels
-    xlabs = {'\eta','\alpha'};
+    xlabs = {'\eta','\alpha','sza'};
     D2subplot(1,1,1,[.1 .1 .08 .16],[0 0 0 0]);
     set(gca,'Visible','off');
     for ii=1:numt

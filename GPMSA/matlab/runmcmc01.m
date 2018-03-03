@@ -20,7 +20,7 @@ nlev = 9;
 pout = stepsize(params,nburn,nlev);
 
 pout=gpmmcmc(pout,10000);
-save('pout_10000.mat', 'pout');
+save('pout_10000_sza.mat', 'pout');
 
 showPvals(pout.pvals);
 

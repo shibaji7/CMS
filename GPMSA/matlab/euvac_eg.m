@@ -2,11 +2,11 @@ function params=ebola02eg(doPlot);
 
 if ~exist('doPlot'); doPlot=0; else; doPlot=1; end
 
-ysim = textread('R/sim.txt');
+ysim = textread('../R/sim.txt');
 [neta m] = size(ysim);
 time = [1:neta]';
 
-designNative = textread('R/design.txt');
+designNative = textread('../R/design.txt');
 dmat1 = repmat(designNative,[5 1]);
 design01 = to01(designNative);
 
@@ -21,7 +21,7 @@ end
 
 
 % read in the observations
-obsdat = textread('R/obs.txt');
+obsdat = textread('../R/obs.txt');
 ydat = obsdat;
 Sigy = 0.1 * eye(neta);
 
