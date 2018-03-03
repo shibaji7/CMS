@@ -72,6 +72,7 @@ def __abs_model(args):
     bins = conf["bins"]
     lon = np.mod((lon+180),360)-180
     fname = "out/attn_%s_%s.csv"%(args[0],args[1])
+    
     if modify:
         etap = float(args[0])
         alphas["0"] = float(args[1]) * alphas["0"]
@@ -79,7 +80,8 @@ def __abs_model(args):
         alphas["2"] = float(args[1]) * alphas["2"]
         lat = float(args[2])
         lon = float(args[3])
-    	fname = args[4]+"/attn_%s_%s_%s_%s.csv"%(args[0],args[1],args[2],args[3])
+        lon = np.mod((lon+180),360)-180
+    	fname = "out/"+args[4]+"/attn_%s_%s.csv"%(args[0],args[1])
         print fname
         pass
     dn = conf["dn"] - dt.timedelta(minutes=10)
