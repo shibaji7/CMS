@@ -90,7 +90,7 @@ end
 % First simData
 % required fields
 simData.x   = [repmat(.5, [m 1]),design01];
-simData.x = [repmat(.5, [m 1]),design01(:,1:2)];
+simData.x = [repmat(.5, [m 1]),design01[:,1:2]];
 %simData.x   = [.5*ones(size(dmatQ)) design01];
 simData.yStd=ysimStd;
 simData.Ksim=Ksim;

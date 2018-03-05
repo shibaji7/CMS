@@ -24,7 +24,7 @@ save('pout_10000_sza.mat', 'pout');
 
 showPvals(pout.pvals);
 
-ip = round(linspace(900,10090,50));
+ip = round(linspace(900,10900,50));
 
 % load previously saved pout object for plotting
 load('pout_10000.mat')

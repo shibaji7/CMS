@@ -2,7 +2,7 @@
 ## eta_n x m matrix where m is the number of unique input settings
 ## and eta_n is the length of each output
 
-simout_path <- '../../out_sza_tag/'
+simout_path <- '../../out_sza_unif/'
 files <- list.files(simout_path, pattern = "csv")
 nfile <- length(files)
 
