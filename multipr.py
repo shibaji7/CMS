@@ -7,7 +7,7 @@ import sza_calc as szac
 import numpy as np
 import datetime as dt
 
-riom = "ott"
+riom = "gill"
 RM = pd.read_csv("rio.csv")
 rm = RM[RM.code==riom]
 lat = rm["lat"]
