@@ -50,7 +50,13 @@ for f in files:
         for t in TC:
             if t not in tc:
                 tm1 = df[df.times==t-dt.timedelta(minutes=1)].absv.tolist()[0]
-                tp1 = df[df.times==t+dt.timedelta(minutes=1)].absv.tolist()[0]
+                kk = 1
+                while kk < 10:
+                    tp1 = df[df.times==t+dt.timedelta(minutes=kk)].absv.tolist()
+                    if len(tp1)>0:
+                        tp1 = tp1[0]
+                        break
+                    kk = kk - 1
                 ti = (tm1+tp1)/2
                 df.loc[-1] = [t,ti]
                 df.index = df.index + 1
