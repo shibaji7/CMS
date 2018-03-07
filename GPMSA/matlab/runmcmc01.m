@@ -20,7 +20,7 @@ nlev = 9;
 pout = stepsize(params,nburn,nlev);
 
 pout=gpmmcmc(pout,10000);
-save('pout_10000_sza.mat', 'pout');
+save('pout_10000_lamvz10000.mat', 'pout');
 
 showPvals(pout.pvals);
 
@@ -31,3 +31,4 @@ load('pout_10000.mat')
 
 plots(pout, ip, 1);
 plots(pout, ip, 2);
+plots(pout, ip, 4);

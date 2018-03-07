@@ -50,9 +50,9 @@ if doPlot(1);
         D2subplot(ii,pu,1,[.15 .15 .1 .02],[.01 0 .01 0]);
 %         subplot(pu,3,ii+off);
         if ii~=pu
-            boxplot(r, 'labels',{'','',''});
+            boxplot(r, 'labels',{'',''});
         else
-            boxplot(r,'labels',{'eta','alpha','sza'})
+            boxplot(r,'labels',{'eta','alpha'})
 %             xlabel('k');
         end
         a=axis; axis([a(1) a(2) 0 1]);
@@ -174,7 +174,7 @@ if doPlot(3)
     gridu=0:0.1:1; glen=length(gridu);  mlen=glen*glen;
     [gridx,gridy]=meshgrid(gridu,gridu);
     npred = glen;
-    AzEl=[45 55];    
+    AzEl=[45 10];    
     plabs = {'n','h','\sigma_8','\Omega_{CDM}','\Omega_b'};
     for ii=1:q
         plabs(ii) = {['\theta_',num2str(ii)]};
@@ -185,7 +185,9 @@ if doPlot(3)
     % sigma_8 = 0.6 - 1.6
     % omega_m = 0 - 0.6
     % omega_b = 0.02 - 0.12
-    plims = [pout.simData.orig.colmin' pout.simData.orig.colmax'];
+%     plims = [pout.simData.orig.colmin' pout.simData.orig.colmax'];
+    plims = [min(simData.orig.designNative(1,:)) max(simData.orig.designNative(1,:));
+                min(simData.orig.designNative(2,:)) max(simData.orig.designNative(2,:)) ];
     
     prange = diff(plims');
     for ii=2:(p+q)
@@ -209,7 +211,7 @@ if doPlot(3)
         plot3(repmat(pout.simData.orig.time,size(gridu)),...
             repmat(gridu.*prange(ii-1)+plims(ii-1,1),size(pout.simData.orig.time)),v','b'); view(AzEl); 
         if ii<=p; var=['x_' num2str(ii)];else; var=['\theta_' num2str(ii-p)];end
-        ylabel(plabs(ii-1)); 
+%         ylabel(plabs(ii-1)); 
         set(gca,'Fontsize',8,'XColor',[.3 .3 .3]);
         if(ii==2) || (ii==5); 
             zlabel('\Delta ln(n)','FontSize',12); 
@@ -234,7 +236,7 @@ if doPlot(3)
 %         end
         alpha(0.25)
         axis tight; 
-        set(gca,'Xgrid','on','Ygrid','on','Zgrid','on','Zlim',[0 15]);
+        set(gca,'Xgrid','on','Ygrid','on','Zgrid','on','Zlim',[0 3]);
         %set(gca,'Xgrid','on','Ygrid','on','Zgrid','on');
 
         drawnow
@@ -320,8 +322,8 @@ if doPlot(4)
 
         plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo','MarkerSize',4);
         hold on;
-        errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');
-        axis([0 57 0 12]);grid on;
+%         errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');
+        axis([0 90 0 4]);grid on;
 %         set(gca,'XtickLabel','');
 %         if(ii ==1) 
 %             set(gca,'Ytick',[-.1 0 .1]); 
@@ -330,14 +332,14 @@ if doPlot(4)
 %         end
         meanmat = repmat(pout.simData.orig.ymean,[1 2]);
         plot(pout.simData.orig.time,etabounds+meanmat,'g','LineWidth',1);
-        ylabel('log(cumulative infected)','FontSize',10);
+        ylabel('EUVAC','FontSize',10);
         title('Calibrated simulator','Fontsize',10);
         
-        if(writeOut)
-            etafit = prctile(eta,[5 50 95],2);
-            fname = ['calfits' suffix];
-            save(fname,'etafit','-ASCII');
-        end
+%         if(writeOut)
+%             etafit = prctile(eta,[5 50 95],2);
+%             fname = ['calfits' suffix];
+%             save(fname,'etafit','-ASCII');
+%         end
 
         
         % now delta
@@ -346,9 +348,9 @@ if doPlot(4)
         deltaR = pout.simData.orig.Dsim*pred.v'.*pout.simData.orig.ysd;
         deltaRbounds = prctile(deltaR,[5 95],2);
         plot(pout.simData.orig.time,deltaRbounds,'c','LineWidth',0.5); hold on;
-        axis([0 57 -6 6]);grid on;
+        axis([0 90 -1 1]);grid on;
 %         set(gca,'YtickLabel','');
-        xlabel('weeks','FontSize',12);
+        xlabel('time','FontSize',12);
         title('Discrepancy','Fontsize',10);
 %         axis([0 12.5 -.25 .22]);
 %         set(gca,'XtickLabel','');
@@ -364,9 +366,9 @@ if doPlot(4)
         yhatbounds = prctile(yhat,[5 95],2);
         plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo','MarkerSize',4);
         hold on;
-        errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');        
+%         errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');        
         %plot(pout.simData.orig.time,pout.simData.orig.yho(:,17),'k--');
-        axis([0 57 0 12]);grid on;
+        axis([0 90 0 4]);grid on;
 %         set(gca,'YtickLabel','');
         title('Calibrated prediction','Fontsize',10);
 %         axis([0 12.5 -.22 .22]);
@@ -493,7 +495,7 @@ if doPlot(42)
     plot(pout.simData.orig.time,etar,'-','color','c');
     plot(pout.simData.orig.time,etabounds,'--','color','k','Linewidth',1.5);
     plot(pout.obsData(ii).orig.time,yplot,'ko','MarkerSize',4);
-    errorbar(pout.obsData(ii).orig.time,yplot,yesd,'k');
+%     errorbar(pout.obsData(ii).orig.time,yplot,yesd,'k');
     axis tight; grid on;
     ylabel('log(cumulative infected)','FontSize',10);
     xlabel('weeks','FontSize',10);
@@ -510,7 +512,7 @@ if doPlot(42)
     ylabel('Weekly Infected','FontSize',10);
     xlabel('weeks','FontSize',10);
     %title('Posterior Peak Realizations','Fontsize',11);
-    axis([0 57 0 max(mm(kk))+100]); grid on;
+    axis([0 90 0 max(mm(kk))+100]); grid on;
     set(gca, 'YTick',[0 500 1000]);
 %     set(gca, 'Ytick', [0e4 2e4 4e4 6e4]);
 %     set(gca, 'YtickLabel', [0e4 2e4 4e4 6e4]);
@@ -539,7 +541,7 @@ if doPlot(42)
     
 end
 
-% a plot of the predicted w(theta) surface for each PC; use theta 3 and 4
+% a plot of the predicted w(theta) surface for each PC; use theta 1 and 2
 % here as the varying grid.
 if doPlot(5)    
     if newFig; figure(5); end
@@ -554,7 +556,7 @@ if doPlot(5)
     AzEl=[45 55];  
     % make the prediction...
     tdat=ones(npred,p+q)*0.5;
-    tdat(:,4)=gridx(:); tdat(:,2)=gridy(:); %change column index for diff theta
+    tdat(:,2)=gridx(:); tdat(:,3)=gridy(:); %change column index for diff theta
     xpred=tdat(:,1:p);
     theta=tdat(:,p+1:end);
     %pred=gPred(xpred,pvals,model,data,'wpred',theta);
@@ -578,9 +580,9 @@ if doPlot(5)
         D2subplot(4+ii,2,3,[.1 0 0 0],[.1 .1 .06 .01]);
         w1 = reshape(pm(ii,:),[11 11]);
         mesh(gridx,gridy,w1); hold on; axis([0 1 0 1 -3 3]);
-        xlabel('\theta_3','fontSize',11);
-        ylabel('\theta_1','fontSize',11);
-        zlabel(['w_' num2str(ii) '(\theta)'],'fontSize',11);
+        xlabel('\alpha','fontSize',11);
+        ylabel('\eta','fontSize',11);
+        zlabel(['w_' num2str(ii) '(\eta, \alpha)'],'fontSize',11);
         %title(['PC ' num2str(ii)]);
     end
     % plot the mean on row 1 and then K1 and K2 on row 2
@@ -588,24 +590,24 @@ if doPlot(5)
     pbaspect(ax, [3 2.5 1]); hold on;
      plot(pout.simData.orig.time,pout.simData.orig.y, 'Color',[.8,.8,.8]); hold on;
     plot(pout.simData.orig.time,pout.simData.orig.ymean, 'Color','b');
-    xlabel('weeks', 'FontSize', 8);
-    xticks([10 30 50]);
+    xlabel('time', 'FontSize', 8);
+    xticks([10 50 90]);
     ylabel('\phi_0', 'FontSize',11);
-    axis([1 57 0 15]); grid on; box on;
+    axis([1 90 0 5]); grid on; box on;
     ax = D2subplot(2,2,3,[0 0 0 0],[.15 .1 .1 .01]);
     pbaspect(ax, [3 2.5 1]); hold on;
     plot(pout.simData.orig.time,pout.simData.Ksim(:,1)*pout.simData.orig.ysd); 
     ylabel('\phi_1', 'FontSize',11);
-    xlabel('weeks', 'FontSize', 8);
-    xticks([10 30 50]);
-    axis([1 57 -3 1]);grid on; box on;
+    xlabel('time', 'FontSize', 8);
+    xticks([10 50 90]);
+    axis([1 90 -0.5 1]);grid on; box on;
     ax = D2subplot(3,2,3,[0 0 0 0],[.15 .1 .1 .01]);
     pbaspect(ax, [3 2.5 1]); hold on;
     plot(pout.simData.orig.time,pout.simData.Ksim(:,2)*pout.simData.orig.ysd); 
     ylabel('\phi_2', 'FontSize',11);
-    xlabel('weeks', 'FontSize', 8);
-    xticks([10 30 50]);
-    axis([1 57 -3 1]);grid on; box on;
+    xlabel('time', 'FontSize', 8);
+    xticks([10 50 90]);
+    axis([1 90 -0.5 1]);grid on; box on;
     
     D2subplot(1,1,1,[0 0 0 0],[0 0 0 0]);
     set(gca,'Visible','off'); 
