@@ -320,7 +320,7 @@ if doPlot(4)
         yesd = sqrt(diag(pout.obsData(ii).Sigy)).*pout.simData.orig.ysd;
         for k=1:length(yesd) if(yesd(k) > 100.0) yesd(k) = NaN; end; end;
 
-        plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo','MarkerSize',4);
+        plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo-','MarkerSize',4);
         hold on;
 %         errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');
         axis([0 90 0 4]);grid on;
@@ -364,7 +364,7 @@ if doPlot(4)
         yhat = deltaR+eta;
         D2subplot(2+ii,1,3,[.09 .04 .06 .01],[0.06 0.05 0 0]);
         yhatbounds = prctile(yhat,[5 95],2);
-        plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo','MarkerSize',4);
+        plot(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,'bo-','MarkerSize',4);
         hold on;
 %         errorbar(pout.obsData(ii).orig.time,pout.obsData(ii).orig.y,yesd,'b');        
         %plot(pout.simData.orig.time,pout.simData.orig.yho(:,17),'k--');

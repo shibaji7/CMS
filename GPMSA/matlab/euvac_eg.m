@@ -67,7 +67,7 @@ end
 % D basis - build the discrepancy basis
 % lay it out, and record decomposition on sim and data grids
 % Kernel centers and widths
-  Dgrid=-2:10:98; Dwidth=15; 
+  Dgrid=-2:5:98; Dwidth=5; 
   pv=length(Dgrid);
 % Compute the kernel function map, for each kernel
   Dsim=zeros(size(ysimStd,1),pv);

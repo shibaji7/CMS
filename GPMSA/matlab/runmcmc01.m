@@ -27,8 +27,10 @@ showPvals(pout.pvals);
 ip = round(linspace(900,10900,50));
 
 % load previously saved pout object for plotting
-load('pout_10000.mat')
+load('pout_10000_lamvz10000.mat')
 
 plots(pout, ip, 1);
 plots(pout, ip, 2);
+plots(pout, ip, 3);
+plots(pout, ip, 5);
 plots(pout, ip, 4);
