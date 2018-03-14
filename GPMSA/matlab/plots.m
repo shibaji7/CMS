@@ -106,6 +106,7 @@ end
 if doPlot(2)
     if newFig; figure(2); clf; end
     t=[pout.pvals(min(pvec):max(pvec)).theta]';
+%     t=pout.simData.orig.designNative;
     [nreal numt] = size(t);
     thetamax = max(pout.simData.orig.designNative); 
     thetamin = min(pout.simData.orig.designNative); 

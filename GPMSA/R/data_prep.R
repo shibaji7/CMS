@@ -25,7 +25,9 @@ for (i in 1:nfile){
   # x_native[i,3] <- as.numeric(unlist(strsplit(unlist(strsplit(files[i], '_'))[4], '.csv')))
 }
 
-pairs(x_native, labels = c(expression(eta), expression(alpha), "sza"))
+if(PDF) jpeg('../plots/design.jpeg', width=880, height=880)
+pairs(x_native, labels = c(expression(eta), expression(alpha)), gap=0)
+if(PDF) dev.off()
 
 
 ## read observed data
@@ -36,7 +38,7 @@ obs <- obs[,2]
 
 ## a simple plot of obs and sim
 
-if(PDF) pdf('../plots/sim-obs.pdf', width = 9, height = 6)
+if(PDF) jpeg('../plots/sim-obs.jpeg', width = 1000, height = 600)
 par(mfrow=c(1,1))
 plot(NA, xlim = c(0,90), ylim = c(0,5), axes = F, ylab = "euvac", xlab = 'time (seconds)')
 matplot(sim_native, col = 'grey', type = "l", add = T)
