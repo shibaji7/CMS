@@ -2,7 +2,7 @@ addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/gpmsa_2015/matlab')
 addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/matlab')
 addpath('/home/afadikar/Documents/shibaji/git/CMS/GPMSA/PlotFuns')
 
-ebdat = euvac_eg(1);  
+ebdat = euvac_eg(1, 'brd');  
 simData = ebdat.simData;
 obsData = ebdat.obsData;
 params = setupModel(obsData,simData);
@@ -20,14 +20,14 @@ nlev = 9;
 pout = stepsize(params,nburn,nlev);
 
 pout=gpmmcmc(pout,10000);
-save('pout_10000_lamvz10000.mat', 'pout');
+save('pout_10000_brd.mat', 'pout');
 
 showPvals(pout.pvals);
 
 ip = round(linspace(900,10900,50));
 
 % load previously saved pout object for plotting
-load('pout_10000_lamvz10000.mat')
+load('pout_10000_ott.mat')
 
 plots(pout, ip, 1);
 plots(pout, ip, 2);

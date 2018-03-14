@@ -54,3 +54,21 @@ if (var_ == "eta"){
   legend("topright", legend=eta_vec, col = gray(0.1+(((1:nfiles)-1)*0.5/(nfiles-1))), lty = 1)
   dev.off()
 }
+
+
+## plot observed data
+
+files <- list.files('../../Data/csv/', pattern = '.csv')
+files <- c('../../Data/csv/20150311_brd_abs.csv',
+           '../../Data/csv/20150311_gill_abs.csv',
+           '../../Data/csv/20150311_mea_abs.csv',
+           '../../Data/csv/20150311_ott_abs.csv')
+nfile <- length(files)
+
+obs_mat <- matrix(NA, ncol = nfile, nrow = 90)
+for (i in 1:nfile){
+  d <- read.csv(paste0('../../Data/csv/', files[i]), stringsAsFactors = F)
+  obs_mat[,i] <- d[,2]
+}
+
+matplot(obs_mat, type="l")
